@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:meu_anki/ui/german_options_screen.dart';
 import 'package:meu_anki/ui/styles/colors.dart';
+import 'package:picture_button/picture_button.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -73,8 +77,16 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 55),
-          Image.asset(
-            'images/germany-circle-flag.png',
+          PictureButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const GermanOptionsScreen(),
+                ),
+              );
+            },
+            image: AssetImage('images/germany-circle-flag.png'),
             width: 137,
             height: 137,
           ),
