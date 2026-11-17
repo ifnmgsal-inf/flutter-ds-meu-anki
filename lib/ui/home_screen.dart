@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:meu_anki/ui/german_options_screen.dart';
 import 'package:meu_anki/ui/styles/colors.dart';
