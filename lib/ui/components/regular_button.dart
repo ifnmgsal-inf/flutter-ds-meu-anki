@@ -4,13 +4,13 @@ import 'package:meu_anki/ui/styles/colors.dart';
 class RegularButton extends StatelessWidget {
   final String text;
   final VoidCallback? onPressed;
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
   const RegularButton({
     super.key,
     required this.text,
     this.onPressed,
-    this.backgroundColor = AppColors.primary,
+    this.backgroundColor,
   });
 
   @override
@@ -21,7 +21,7 @@ class RegularButton extends StatelessWidget {
       child: TextButton(
         onPressed: onPressed,
         style: TextButton.styleFrom(
-          backgroundColor: backgroundColor,
+          backgroundColor: backgroundColor ?? AppColors.primary,
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
@@ -31,7 +31,7 @@ class RegularButton extends StatelessWidget {
           text,
           style: const TextStyle(
             color: Colors.white,
-            fontSize: 35,
+            fontSize: 34,
             fontFamily: 'Inter',
           ),
         ),

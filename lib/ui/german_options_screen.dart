@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meu_anki/ui/components/regular_button.dart';
 import 'package:meu_anki/ui/styles/colors.dart';
+import 'package:meu_anki/ui/trainieren_screen.dart';
 
 class GermanOptionsScreen extends StatelessWidget {
   const GermanOptionsScreen({super.key});
@@ -36,6 +37,12 @@ class GermanOptionsScreen extends StatelessWidget {
           RegularButton(
             onPressed: () {
               // Handle "Trainieren" button press
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const TrainierenScreen(),
+                ),
+              );
             },
             text: 'Trainieren',
           ),
