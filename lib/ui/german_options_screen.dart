@@ -11,7 +11,17 @@ class GermanOptionsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.background,
-        leading: Icon(Icons.home, size: 30, color: AppColors.surface),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios_new,
+            size: 30,
+            color: AppColors.surface,
+          ),
+          onPressed: () {
+            // Handle back button press
+            Navigator.pop(context); // Navigate back to the previous screen
+          },
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout, size: 30, color: AppColors.surface),

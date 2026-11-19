@@ -17,13 +17,14 @@ class TrainierenScreen extends StatelessWidget {
           height: 40,
         ),
         leading: IconButton(
-          icon: Icon(Icons.home, size: 30, color: AppColors.surface),
+          icon: Icon(
+            Icons.arrow_back_ios_new,
+            size: 30,
+            color: AppColors.surface,
+          ),
           onPressed: () {
             // Handle home button press
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const HomeScreen()),
-            );
+            Navigator.pop(context); // Navigate back to the previous screen
           },
         ),
         actions: [
