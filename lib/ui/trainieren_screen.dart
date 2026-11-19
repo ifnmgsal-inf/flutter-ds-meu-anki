@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:meu_anki/model/answer.dart';
+import 'package:meu_anki/services/answer_service.dart';
 import 'package:meu_anki/ui/components/regular_button.dart';
-import 'package:meu_anki/ui/home_screen.dart';
 import 'package:meu_anki/ui/styles/colors.dart';
 
 class TrainierenScreen extends StatelessWidget {
@@ -62,15 +63,28 @@ class TrainierenScreen extends StatelessWidget {
             ),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Text(
-                'Die Hunde essen zu viel.',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: AppColors.surface,
-                  fontSize: 34,
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w400,
-                ),
+              child: FutureBuilder<List<Answer>>(
+                future: AnswerService().getAnswers(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const CircularProgressIndicator();
+                  } else if (snapshot.hasError) {
+                    return Text('Error: ${snapshot.error}');
+                  } else if (snapshot.hasData) {
+                    return Text(
+                      AnswerService.getRandomAnswer(snapshot.data!).sentence,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: AppColors.surface,
+                        fontSize: 34,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    );
+                  } else {
+                    return const Text('No data available');
+                  }
+                },
               ),
             ),
           ),

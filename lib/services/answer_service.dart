@@ -6,12 +6,15 @@ import 'package:meu_anki/model/answer.dart';
 
 class AnswerService {
   final String url =
-      'https://gist.github.com/leonardo-silva/06a9ef5cfaff85a665c27729de17a2c9';
+      'https://api.github.com/gists/06a9ef5cfaff85a665c27729de17a2c9';
 
   Future<List<Answer>> getAnswers() async {
     final Response response = await get(
       Uri.parse(url),
-      headers: {'Authorization': 'Bearer $githubApiKey'},
+      headers: {
+        'Authorization': 'Bearer $githubApiKey',
+        'Accept': 'application/vnd.github+json',
+      },
     );
 
     if (response.statusCode == 200) {
@@ -23,11 +26,7 @@ class AnswerService {
       List<Answer> listAnswers = [];
       for (var item in listDynamic) {
         Map<String, dynamic> mapItem = item as Map<String, dynamic>;
-        Answer answer = Answer(
-          id: int.parse(mapItem['id'].toString()),
-          sentence: mapItem['sentence'],
-          translation: mapItem['translation'],
-        );
+        Answer answer = Answer.fromJson(mapItem);
         listAnswers.add(answer);
       }
 
@@ -35,5 +34,10 @@ class AnswerService {
     } else {
       throw Exception('Failed to load answers');
     }
+  }
+
+  static Answer getRandomAnswer(List<Answer> answers) {
+    int id = DateTime.now().millisecondsSinceEpoch % answers.length;
+    return answers[id];
   }
 }
